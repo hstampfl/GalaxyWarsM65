@@ -11,7 +11,7 @@
 //**************************************************************
 //** Basic Start
 //**************************************************************
-BasicUpstart65(main)
+BasicUpstart65(start)
 
 //**************************************************************
 //** Include MemoryMap Labels
@@ -28,12 +28,13 @@ BasicUpstart65(main)
 //** Include other asm files
 //**************************************************************
 #import "data.asm"                  //** include data definitions from data.asm
+#import "strings.asm"               //** include strings perhaps I will translate it in a later stage easily
 
 //**************************************************************
 //** Program start
 //**************************************************************
 *=$2020 "GalaxyWars"
-main:
+start:
 
     // VIC4 init to $d000 and enable it
     lda #$35
@@ -52,12 +53,19 @@ main:
     stx BGCOL0                      //** Store Black color in Background
     ldx #BlackCol                   //** Load black color ** (only needed when other color )
     stx EXTCOL                      //** Store black color in border
-    
+
+
+main:
+title_screen:
+    //*******
+    :print_at(12,12,txt_en_gametitle)   // Macro print_at Input: column, row, textstring
+
+    jmp title_screen
     rts
 
 
 
 //**************************************************************
-//** include subroutines
+//** include subroutines (including macros)
 //************************************************************** 
 #import "subroutines.asm"           //** Include subroutines from subroutines.asm 
