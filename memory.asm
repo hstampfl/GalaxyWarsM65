@@ -12,13 +12,13 @@
 
 
 // sprite addresses
-.label SEPNA = $D015                // Sprite enable register
+.label SPENA = $D015                // Sprite enable register
 .label SP0X = $D000                 // Sprite 0 horizontal position
 .label SP0Y = $D001                 // Sprite 0 vertical position
 .label SP0COL = $D027               // Sprite 0 colour
 .label SPSPCL = $D01E               // Sprite to sprite collision
 .label SPBGCL = $D01F               // Sprite to background collision
-.label SSDP0 =  $0BF8               // M65:Sprite 0 Datapointer
+.label SP0DP =  $0BF8               // M65:Sprite 0 Datapointer
 
 // joystick addresses
 .label CIAPRA = $DC00               // Joystick port 2

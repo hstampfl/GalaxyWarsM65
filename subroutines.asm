@@ -16,8 +16,7 @@ ClearScreen: {
 
 
 //**************************************************************
-//** screen position at
-//** 
+//** print text at position
 //**************************************************************
 .macro print_at(column, row, textstring) {
     .var screen_at = ScreenMemory + 40*row+column
