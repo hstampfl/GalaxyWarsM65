@@ -11,9 +11,42 @@ ClearScreen: {
             sta ScreenBlock4,x
             inx         
             bne clearscr
-            rts
+            rts 
+
+            
 }
 
+checkKeypressSpaceStartGame: {
+            
+        check_space:
+            lda $d610               // Read ASCIIKEY at $d610 
+            cmp #$20                // DEC 32 - SPACE
+            bne check_keypress_end
+            lda #$00                // write something into $d610 to clar
+            sta $d610 
+            jmp game_init
+
+        check_keypress_end:
+           
+            rts
+
+}
+
+checkKeypressRunStopGame: {
+            
+        check_space:
+            lda $d610               // Read ASCIIKEY at $d610 
+            cmp #$03                // DEC 03 - RUN/STOP (need to be verified)
+            bne check_keypress_end
+            lda #$00                // write something into $d610 to clar
+            sta $d610 
+            jmp title_init          // jump to title_init
+
+        check_keypress_end:
+           
+            rts
+
+}
 
 //**************************************************************
 //** print text at position

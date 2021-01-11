@@ -35,7 +35,7 @@ BasicUpstart65(start)
 //**************************************************************
 *=$2020 "GalaxyWars"
 start:
-    sei
+
     // VIC4 init to $d000 and enable it
     lda #$35
     sta $01
@@ -46,7 +46,7 @@ start:
     and #$7f
     sta $d031
 
-
+    jsr ClearScreen
 
     // Set border and background color
     ldx #BlackCol                   //** Load black color
@@ -56,28 +56,64 @@ start:
 
 
 main:
-title_init:
-    jsr ClearScreen
-    // disable sprite0
-    lda #%00000000
-    sta SPENA
-
 title_screen:
-    //*******
-    :print_at(12,12,txt_en_gametitle)   // Macro print_at Input: column, row, textstring
-    //:print_at(1,1,$d610)
 
-
-    jsr checkKeypressSpaceStartGame
-
-    jmp title_screen
+    sei
+    lda #$37
+    sta $01
+  
+    lda #$00
+    ldx #<IRQ
+    ldy #>IRQ
+    stx $0314
+    sty $0315
+    sta $D012
+    lda #$7F
+    sta $DC0D
+    lda #$1B
+    sta $D011
+    lda #$01
+    sta $D01A
     cli
-    rts
+    jmp *
 
-//**************************************************************
-//** Game Files
-//**************************************************************
-#import "gameloop.asm"              //** Include gameloop
+IRQ:
+    inc $D019
+    lda $DC0D
+    sta $DD0D
+    jsr RASTERBAR
+    jmp $EA7E
+
+RASTERBAR:
+    lda #$aa // Set position of raster split
+    cmp $D012  //to current raster position.
+    bne *-3   // Jump back to cmp
+
+    ldx #$00
+RASTERLOOP:
+    lda RASCOL,X
+    ldy TIMING,X
+    dey
+    bne *-1   // Jump back to dey
+
+    // sta $D020
+    sta $D021
+    inx
+    cpx #TIMINGEND-TIMING // Or you could use RASCOLEND-RASCOL
+    bne RASTERLOOP
+    rts
+//Table for raster colours
+RASCOL: .byte $02,$0a,$07,$01,$03,$0e,$06,$00
+RASCOLEND: .byte $00
+//Table for raster timing (requires patience with flicker fixing)
+//NOTE: In order to work out the timing for each raster line,
+//you need to trigger a flicker to move left / right on current line
+//according to the value of the raster position. This requires a lot
+//of trial and error. It is very easy to time out each line, but
+//can be a real pain now and then anyhow :)
+TIMING: .byte $05,$08,$08,$08,08,$08,$08,$08
+TIMINGEND: .byte $00
+
 
 
 //**************************************************************
