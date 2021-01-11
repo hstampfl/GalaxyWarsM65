@@ -9,10 +9,10 @@ Actually I am coding on a windows notebook with Visual Studio Code and KickAssem
 ### compile.bat 
 Use following command to compile and open it directly in xemu 
 
-´compile.bat main.prg xemu´
+```compile.bat main.prg xemu```
 
 Use following command to compile and send it directly to Mega65 
 
-´compile.bat main.prg m65´
+```compile.bat main.prg m65```
 
 
