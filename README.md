@@ -5,3 +5,14 @@ Now after about 35 years it's time to start with the next step to fullfil my dre
 
 ## Development environment
 Actually I am coding on a windows notebook with Visual Studio Code and KickAssembler. 
+
+### compile.bat 
+Use following command to compile and open it directly in xemu 
+
+```compile.bat main.prg xemu```
+
+Use following command to compile and send it directly to Mega65 
+
+```compile.bat main.prg m65```
+
+
