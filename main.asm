@@ -48,16 +48,20 @@ start:
 
 
 
+    
+
+
+main:
+title_init:
+    
+    jsr ClearScreen                 // goto subroutine ClearScreen
+
     // Set border and background color
     ldx #BlackCol                   //** Load black color
     stx BGCOL0                      //** Store Black color in Background
     ldx #BlackCol                   //** Load black color ** (only needed when other color )
     stx EXTCOL                      //** Store black color in border
 
-
-main:
-title_init:
-    jsr ClearScreen
     // disable sprite0
     lda #%00000000
     sta SPENA
