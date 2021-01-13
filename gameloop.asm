@@ -11,13 +11,13 @@ game_loop:
         // Raster wait
         lda $d012 
         cmp #$ff
-        bne check_inraster_end
+        bne check_notinraster_end
         
         jsr updateJoystickInput 
         jsr checkKeypressRunStopGame
         jsr checkKeypressEscStopGame
     
-    check_inraster_end:
+    check_notinraster_end:
 
         //show sprite0 at titlescreen
         lda #$c0                            //** DEC 192

@@ -34,12 +34,13 @@ BasicUpstart65(start)
 //** Program start
 //**************************************************************
 *=$2020 "GalaxyWars"
+
 start:
     sei
     // VIC4 init to $d000 and enable it
     lda #$35
     sta $01
-    enableVIC4Registers()           //** enable VIC4 registers from m65macros.s
+    enableVIC4Registers()           //** enable VIC4 registers and Mega65 IO from m65macros.s
 
     // Turn off H640 mode (switch to 320x200)
     lda $d031
@@ -68,7 +69,8 @@ title_init:
 
 title_screen:
     //*******
-    :print_at(12,12,txt_en_gametitle)   // Macro print_at Input: column, row, textstring
+    :print_at(12,11,txt_en_gametitle)   // Macro print_at Input: column, row, textstring
+    :print_at(11,15,txt_en_starttitle)  // Print info
     //:print_at(1,1,$d610)
 
 
