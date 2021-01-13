@@ -48,10 +48,6 @@ start:
     sta $d031
 
 
-
-    
-
-
 main:
 title_init:
     
